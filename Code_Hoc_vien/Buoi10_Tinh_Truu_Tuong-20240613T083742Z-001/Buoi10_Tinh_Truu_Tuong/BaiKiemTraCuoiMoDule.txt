@@ -1,0 +1,51 @@
+
+- Dựa vào hình vẽ abstract_interface_class_diff.png triển khai cấu trúc class đáp ứng được 
+	như hình vẽ sử dụng abstract class, interface, class 
+	
+- Với Animal gồm các thuộc tính: 
+	+ id
+	+ tên
+	+ màu lông
+	
+	class Dog với các thuộc tính: 
+		+ màu đuôi
+	class Chim có thuộc tính: 
+		+ loại hạt
+	class Cá có thuộc tính: 
+		+ vùng biển 
+- Với Machine gồm các thuộc tính 
+	+ id
+	+ ngày sản xuất
+	+ hãng
+	+ tên
+	class Xe có các thuộc tính: 
+		+ ngày hết đăng kiểm
+	class Máy Bay có các thuộc tính 
+		+ sân bay
+lưu ý:
+	- tất cả các class đều phải có hàm nhập thông tin 
+	và hiển thị thông tin 
+	- tự định nghĩa triển khai cho các method trong hình 
+		có thể chỉ hiển thị ra màn hình một dòng text nhưng 
+		đính kèm thuộc tính tên 
+yêu cầu: 
+	- Xây dựng thành một chương trình với các chức năng 
+	1) Quản lý danh sách động vật bao gồm các chức năng
+		+ thêm một loại động vậy có thể là chó hoặc chim hoặc cá 
+			id là duy nhất với các loại động vật 
+		+ sửa thông tin các động vật theo id
+		+ tìm kiếm gần đúng động vật theo tên
+	2) Quản lý danh sách loại máy bao gồm các chức năng
+		+ thêm một loại máy móc có thể là xe hoặc máy bay 
+			id là duy nhất với các loại máy móc
+		+ sửa thông tin các máy theo id
+		+ tìm kiếm gần đúng máy móc theo tên
+		
+Lưu ý: 
+- Xây dựng dưới dạng menu chức năng với danh sách các chức 
+năng ở trên và chức năng thoát chương trình. Chỉ thoát chương trình 
+khi chọn chức năng thoát. 
+- Sử dụng try catch để bắt các lỗi từ dữ liệu người dùng nhập vào 
+không để chương trình đột ngột kết thúc khi người dùng nhập sai 
+dữ liệu đầu vào. Tham khải tài liệu Buoi10_Exception.pptx
+	

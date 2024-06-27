@@ -1,0 +1,197 @@
+package com.t3h.buoi5.bai2;
+import java.util.Scanner;
+
+public class QuanLyHocSinh {
+    private static HocSinh[] danhSachHocSinh = new HocSinh[100];
+    private static int soLuongHocSinh = 0;
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int choice;
+
+        do {
+            System.out.println("=== Quản lý học sinh ===");
+            System.out.println("1. Hiển thị danh sách học sinh");
+            System.out.println("2. Thêm học sinh mới");
+            System.out.println("3. Hiển thị các học sinh có tuổi là 23 và quê ở Đà Nẵng");
+            System.out.println("4. Tìm kiếm học sinh theo tên hoặc năm sinh");
+            System.out.println("5. Xóa học sinh theo mã học sinh và tên học sinh");
+            System.out.println("6. Chỉnh sửa thông tin học sinh theo mã học sinh");
+            System.out.println("7. Thoát chương trình");
+            System.out.print("Lựa chọn của bạn: ");
+            choice = scanner.nextInt();
+            scanner.nextLine(); // Đọc bỏ dòng new line
+
+            switch (choice) {
+                case 1:
+                    hienThiDanhSachHocSinh();
+                    break;
+                case 2:
+                    themHocSinhMoi(scanner);
+                    break;
+                case 3:
+                    hienThiHocSinhTuoi23QueDaNang();
+                    break;
+                case 4:
+                    timKiemHocSinh(scanner);
+                    break;
+                case 5:
+                    xoaHocSinh(scanner);
+                    break;
+                case 6:
+                    chinhSuaThongTinHocSinh(scanner);
+                    break;
+                case 7:
+                    System.out.println("Thoát chương trình.");
+                    break;
+                default:
+                    System.out.println("Lựa chọn không hợp lệ, vui lòng chọn lại.");
+            }
+        } while (choice != 7);
+
+        scanner.close();
+    }
+
+    public static void hienThiDanhSachHocSinh() {
+        if (soLuongHocSinh == 0) {
+            System.out.println("Danh sách học sinh trống.");
+        } else {
+            System.out.println("Danh sách học sinh:");
+            for (int i = 0; i < soLuongHocSinh; i++) {
+                System.out.println(danhSachHocSinh[i]);
+            }
+        }
+    }
+
+    public static void themHocSinhMoi(Scanner scanner) {
+        if (soLuongHocSinh >= danhSachHocSinh.length) {
+            System.out.println("Danh sách học sinh đã đầy, không thể thêm mới.");
+            return;
+        }
+        System.out.print("Nhập mã học sinh: ");
+        String maHocSinh = scanner.nextLine();
+        System.out.print("Nhập họ tên: ");
+        String hoTen = scanner.nextLine();
+        System.out.print("Nhập tuổi: ");
+        int tuoi = scanner.nextInt();
+        scanner.nextLine(); // Đọc bỏ dòng new line
+        System.out.print("Nhập quê quán: ");
+        String queQuan = scanner.nextLine();
+        System.out.print("Nhập năm sinh: ");
+        int namSinh = scanner.nextInt();
+        scanner.nextLine(); // Đọc bỏ dòng new line
+        System.out.print("Nhập số điện thoại: ");
+        String soDienThoai = scanner.nextLine();
+        System.out.print("Nhập ngày tháng năm sinh: ");
+        String ngayThangNamSinh = scanner.nextLine();
+
+        HocSinh hocSinh = new HocSinh(maHocSinh, hoTen, tuoi, queQuan, namSinh, soDienThoai, ngayThangNamSinh);
+        danhSachHocSinh[soLuongHocSinh] = hocSinh;
+        soLuongHocSinh++;
+        System.out.println("Thêm học sinh thành công.");
+    }
+
+    public static void hienThiHocSinhTuoi23QueDaNang() {
+        boolean found = false;
+        for (int i = 0; i < soLuongHocSinh; i++) {
+            HocSinh hs = danhSachHocSinh[i];
+            if (hs.getTuoi() == 23 && hs.getQueQuan().equalsIgnoreCase("Đà Nẵng")) {
+                System.out.println(hs);
+                found = true;
+            }
+        }
+        if (!found) {
+            System.out.println("Không có học sinh nào có tuổi 23 và quê ở Đà Nẵng.");
+        }
+    }
+
+    public static void timKiemHocSinh(Scanner scanner) {
+        System.out.print("Nhập tên hoặc năm sinh để tìm kiếm: ");
+        String input = scanner.nextLine();
+        boolean found = false;
+        try {
+            int namSinh = Integer.parseInt(input);
+            for (int i = 0; i < soLuongHocSinh; i++) {
+                HocSinh hs = danhSachHocSinh[i];
+                if (hs.getNamSinh() == namSinh) {
+                    System.out.println(hs);
+                    found = true;
+                }
+            }
+        } catch (NumberFormatException e) {
+            for (int i = 0; i < soLuongHocSinh; i++) {
+                HocSinh hs = danhSachHocSinh[i];
+                if (hs.getHoTen().toLowerCase().contains(input.toLowerCase())) {
+                    System.out.println(hs);
+                    found = true;
+                }
+            }
+        }
+        if (!found) {
+            System.out.println("Không tìm thấy học sinh nào phù hợp.");
+        }
+    }
+
+    public static void xoaHocSinh(Scanner scanner) {
+        System.out.print("Nhập mã học sinh: ");
+        String maHocSinh = scanner.nextLine();
+        System.out.print("Nhập tên học sinh: ");
+        String hoTen = scanner.nextLine();
+        boolean removed = false;
+        for (int i = 0; i < soLuongHocSinh; i++) {
+            HocSinh hs = danhSachHocSinh[i];
+            if (hs.getMaHocSinh().equals(maHocSinh) && hs.getHoTen().equals(hoTen)) {
+                for (int j = i; j < soLuongHocSinh - 1; j++) {
+                    danhSachHocSinh[j] = danhSachHocSinh[j + 1];
+                }
+                danhSachHocSinh[soLuongHocSinh - 1] = null;
+                soLuongHocSinh--;
+                removed = true;
+                break;
+            }
+        }
+        if (removed) {
+            System.out.println("Xóa học sinh thành công.");
+        } else {
+            System.out.println("Không tìm thấy học sinh để xóa.");
+        }
+    }
+
+    public static void chinhSuaThongTinHocSinh(Scanner scanner) {
+        System.out.print("Nhập mã học sinh: ");
+        String maHocSinh = scanner.nextLine();
+        HocSinh hocSinh = null;
+        int index = -1;
+        for (int i = 0; i < soLuongHocSinh; i++) {
+            if (danhSachHocSinh[i].getMaHocSinh().equals(maHocSinh)) {
+                hocSinh = danhSachHocSinh[i];
+                index = i;
+                break;
+            }
+        }
+        if (hocSinh == null) {
+            System.out.println("Không tìm thấy học sinh với mã này.");
+            return;
+        }
+        System.out.println("Thông tin học sinh hiện tại: ");
+        System.out.println(hocSinh);
+        System.out.print("Nhập họ tên mới: ");
+        hocSinh.setHoTen(scanner.nextLine());
+        System.out.print("Nhập tuổi mới: ");
+        hocSinh.setTuoi(scanner.nextInt());
+        scanner.nextLine();
+        System.out.print("Nhập quê quán mới: ");
+        hocSinh.setQueQuan(scanner.nextLine());
+        System.out.print("Nhập năm sinh mới: ");
+        hocSinh.setNamSinh(scanner.nextInt());
+        scanner.nextLine();
+        System.out.print("Nhập số điện thoại mới: ");
+        hocSinh.setSoDienThoai(scanner.nextLine());
+        System.out.print("Nhập ngày tháng năm sinh mới: ");
+        hocSinh.setNgayThangNamSinh(scanner.nextLine());
+
+        danhSachHocSinh[index] = hocSinh;
+        System.out.println("Cập nhật thông tin học sinh thành công.");
+    }
+}
+

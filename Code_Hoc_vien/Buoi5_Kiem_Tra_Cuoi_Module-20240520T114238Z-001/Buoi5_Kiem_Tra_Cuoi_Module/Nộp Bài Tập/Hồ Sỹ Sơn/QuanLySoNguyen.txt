@@ -1,0 +1,60 @@
+package com.t3h.buoi5;
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class QuanLySoNguyen {
+    public static void main(String[] args) {
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Nhập số lượng phần tử của mảng: ");
+            int n = scanner.nextInt();
+            int[] arr = new int[n];
+            for (int i = 0; i < n; i++) {
+                while (true) {
+                    System.out.print("Nhập phần tử thứ " + (i + 1) + ": ");
+                    int number = scanner.nextInt();
+                    if (number > 0) {
+                        arr[i] = number;
+                        break;
+                    } else {
+                        System.out.println("Phần tử phải lớn hơn 0, vui lòng nhập lại.");
+                    }
+                }
+            }
+            System.out.println("Danh sách đã nhập: " + Arrays.toString(arr));
+            int sumOdd = 0;
+            for (int number : arr) {
+                if (number % 2 != 0) {
+                    sumOdd += number;
+                }
+            }
+            System.out.println("Tổng các phần tử lẻ trong danh sách: " + sumOdd);
+
+            System.out.print("Nhập vào một số bất kỳ: ");
+            int searchNumber = scanner.nextInt();
+            int count = 0;
+            for (int number : arr) {
+                if (number == searchNumber) {
+                    count++;
+                }
+            }
+            System.out.println("Số phần tử giống với " + searchNumber + ": " + count);
+            int[] arrAsc = Arrays.copyOf(arr, arr.length);
+            Arrays.sort(arrAsc);
+            System.out.println("Danh sách sắp xếp từ bé đến lớn: " + Arrays.toString(arrAsc));
+            int[] arrDesc = Arrays.copyOf(arr, arr.length);
+            Arrays.sort(arrDesc);
+            for (int i = 0; i < arrDesc.length / 2; i++) {
+                int temp = arrDesc[i];
+                arrDesc[i] = arrDesc[arrDesc.length - 1 - i];
+                arrDesc[arrDesc.length - 1 - i] = temp;
+            }
+            System.out.println("Danh sách sắp xếp từ lớn đến bé: " + Arrays.toString(arrDesc));
+            System.out.print("Nhập vào một phần tử để xóa các phần tử trùng: ");
+            int deleteNumber = scanner.nextInt();
+            arr = Arrays.stream(arr).filter(num -> num != deleteNumber).toArray();
+            System.out.println("Danh sách sau khi xóa các phần tử trùng với " + deleteNumber + ": " + Arrays.toString(arr));
+
+            scanner.close();
+        }
+    }
+

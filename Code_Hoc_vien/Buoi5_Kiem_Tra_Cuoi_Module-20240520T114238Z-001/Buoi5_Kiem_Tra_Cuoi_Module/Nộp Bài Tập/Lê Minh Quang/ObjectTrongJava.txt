@@ -1,0 +1,56 @@
+ /**
+
+     * Class:
+        - định nghĩa:
+            là một khuôn mẫu để tạo ra các đối tượng
+            bằng constructor
+        - các thành phần của class
+            - tên class
+                định dạnh của class
+            - các thuộc tính(attribute, field)
+                lưu trữ các dữ liệu của đối tượng được tạo ra
+            - các method
+                + đó vai trò là các hành động mà đối tượng có
+                thể thực hiện
+                + các method sẽ hoạt động phụ thuộc vào giá trị
+                    của thuộc tính
+            - constructor
+                + khởi tạo ra các đối tượng trong heap memory
+            - phạm vi truy cập(access modify)
+                + sử dụng để giới hạn phạm vi truy
+                cập hoặc sửa đối tới các thành viên
+                trong class
+                + private:
+                    chỉ có thể truy cập hoặc update
+                    giá trị của thanh viên đó trong nội
+                    bộ class.
+                    => để truy cập vào các attribute private
+                    sẽ phải sinh ra các method getter, setter,
+                    giúp hỗ trợ kiểm soát truy cập hoặc thay đổi
+                    giá trị của attribute
+                + public
+                    có thể truy cập hoặc update giá trị
+                    của thành viên đó ở mọi file trong
+                    project
+        * Đối tượng(Object)
+            là một thể hiện được tạo ra từ class, khi tạo ra một đối tượng
+            là ta đang tạo ra một phiên bản của lớp đó với các thuộc tính, hành vi
+            cụ thể
+            => khi đó
+                - các thuộc tính của class => thành các trạng thái của đối tượng
+                và có giá trị khác nhau với mối đối tượng
+                - các method của class sẽ thành các hành vi mà đối tượng có thể thực
+                thi, phụ thuộc vào giá trị các trạng thái của đối tượng
+     * Mối quan hệ của Class và Object
+        - Một class có thể tạo ra rất nhiều object từ class đó.
+        - Một object được coi như một thể hiện của class
+
+     */
+
+     * Mảng là gì
+     -Mảng là 1 cấu trúc lưu trữ dữ liệu
+     - Các Dữ liệu trong mạng phải có cùng kiểu dữ liệu
+     - Các thành viên trong mảng phải đứng liền  kề nhau
+
+     -Hàm leght sẽ trả ra số lượng phần tử của mảng
+     -Hàm clone sẽ sao chép mảng xang 1 mảng mới
