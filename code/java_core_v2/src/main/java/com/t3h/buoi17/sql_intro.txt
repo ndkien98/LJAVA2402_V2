@@ -1,0 +1,52 @@
+mysql: hoạt động theo cơ chết client - server
+client: mysql workbench, php mysql admin, intellij, command line window...
+    - đảm nhận nhiệm vụ tiếp nhận các yêu cầu từ người dùng, chính là các câu select hoặc các câu lệnh người dùng
+        viết để truyền tới server thực thi
+server: mysql server Server version: 8.4.0 MySQL Community Server, có nhiều loại version doanh nghiệp khác
+    - nhận về các request chứa các câu lệnh từ client maf người dùng thực thi, xử lý login và truy vấn dữ liệu
+    từ các file vật lý trong hệ thống
+
+* Khóa chính
+    - là một ràng buộc để xác định tính duy nhất của mỗi hàng (record, bản ghi) trong một table của database
+    - vd:
+        trong một table có hai bản ghi nhân viên có tất cả các thông tin đều giống nhau
+        vậy câu hỏi làm thế nào để phân biệt được hai bản ghi đó
+        => phải dựa vào khóa chính để phân biệt được hai bản ghi đó khác nhau như thế nào
+        vì khóa chính có hai đặc điểm:
+            1) tính duy nhất: trong một table, không thể tồn tại hai bản ghi(dòng, record) có cùng khóa chính
+                nếu cố tình insert hai bản ghi có cùng khóa chính, sẽ sảy ra lỗi
+            2) không null: khóa chính không thể chứa giá trị null
+
+    - ưu điểm:
+        tăng tốc độ truy vấn dữ liệu khi truy vấn trên khóa chính
+* Khóa ngoại
+    - là một ràng buộc trong cơ sở dữ liệu được sử dụng để tạo mối quan hệ giữa hai bảng
+    - cách triển khai
+        + tạo một cột bất kỳ đặt nó làm khóa ngoại
+        + liên kết cột đấy trỏ tới khóa chính của bảng muốn tạo mối quan hệ giữa hai bảng
+    ví dụ: yêu cầu triền khai hệ thống, đặc tả yêu cầu gồm
+        Cần triển khai cơ sở dữ liệu lưu trữ thông tin của nhân viên và thông tin hợp đồng của mỗi nhân viên, mỗi nhân viên
+        có thể có một hoặc nhiều hợp đồng, nhưng mỗi hợp đồng chỉ có thể thuộc về một nhân viên duy nhất
+        - bảng nhân viên gồm các thông tin:
+            + id, MaNV, tên nhân viên, tuổi
+                lưu ý: id là khóa chính
+        - bảng hợp đồng gồm các thông tin:
+            + id, mã hợp đồng, tên hợp đồng, ngày hiệu lực, lương
+                lưu ý: id là khóa chính
+    cách làm:
+        - tạo ra hai table employee, contract
+        - trong bảng contract tạo thêm một cột employee_id, cột này đóng vai trò làm khóa ngoại của hai bảng employee và
+        contract, sử dụng câu lệnh
+
+        alter table contract add constraint fk_employee_contract foreign key (employee_id) references employee(id);
+        -> đây là câu lệnh khai báo cột employee_id của bảng contract sẽ trở thành khóa ngoại và liên hết tới
+        cột id của bảng employee
+    các bước làm:
+        b1: tạo database manager_employee
+            với cột id sử dụng câu lệnh id long primary key auto_increment
+            tự động config đó là khóa chính, và id sẽ tự động được tăng
+        b2: tạo table employee và các column
+        b3: tạo table contract và các column
+        b4: tạo khóa ngoại bằng câu lệnh
+        alter table contract add constraint fk_employee_contract foreign key (employee_id) references employee(id);
+        b5: thêm data

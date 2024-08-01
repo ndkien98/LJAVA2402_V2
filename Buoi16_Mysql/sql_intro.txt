@@ -1,0 +1,69 @@
+-- Nhom cau lenh  cơ sở dữ liệu
+-- tao co so du lieu CƠ SỞ DỮ LIỆU HÀNG KHÔNG
+create database quanlyhangkhong;
+
+-- chỉ định database muốn thao tác use ten_database;
+use quanlyhangkhong;
+
+-- Các câu lệnh liên quan đến bảng dữ liệu
+    -- 1)  Tạo bảng NHANVIEN(MaNV, Ten, Luong) mô tả thông tin về nhân viên phi hành ñoàn gồm phi công và
+        -- tiếp viên. Mỗi nhân viên có một mã số duy nhất, tên và mức lương.
+use quanlyhangkhong;
+create table NHANVIEN(
+        MaNV CHAR(20) primary key, -- đặt tên cột là MaNV, kiểu dữ liệu CHAR lưu trữ max 20 lý tự,
+#         primary key: đặt cột MaNV là khóa chính, đảm bảo tất cả các dữ liệu không được trùng nhau, \
+#                       hay không có hai nhân viên nào bị trùng mã nhân viên
+        ten nvarchar(50), -- tên cột cột là tên, với kiểu dữ liệu nvarchar, số ký tự có thể lưu là 50 ký tự, cho phép lưu tiếng việt(utf8)
+        luong float -- name colum: luong, data type: float
+    );
+
+    -- 2) Update table
+    alter table NHANVIEN
+    modify column luong char; -- update datatype colum luong from float to char
+
+    alter table NHANVIEN
+    add column age int; -- add colum age to table NHANVIEN
+
+    -- 3) Delete table
+    drop table NHANVIEN; -- delete table NHANVIEN
+
+# Nhóm câu lệnh thao tác với dữ liệu của bảng
+# 1) add data to table
+     insert into NHANVIEN(manv, ten, luong) value ('A001','Nguyễn Đắc Kiên',10000);
+insert into NHANVIEN(manv, ten, luong) value ('B001','Le Van Tuan',20000);
+insert into NHANVIEN(manv, ten, luong) value ('C001','Le Văn Thành',30000);
+insert into NHANVIEN(manv, ten, luong) value ('D001','Nguyễn Văn Hinh',30000);
+#    syntax       name_table(colum...)          (value each column)
+
+# 2) update data in table
+    update NHANVIEN set luong = 2000,MaNV='N002' where ten='Nguyễn Đắc Kiên';
+    -- update data luong to 2000 and MaNV to 'N002' with ten = 'Nguyễn Đắc Kiên'
+# 3) Xóa bản ghi trong table
+    delete from NHANVIEN where ten='Nguyễn Đắc Kiên';
+
+# Nhóm câu lệnh truy vấn lấy dữ liệu ra từ bảng
+# 1) Select: lấy dữ liệu của bảng
+select * from NHANVIEN; -- lấy toàn bộ dữ liệu trong bảng nhân viên bao gồm
+# tất cả các cột, tất cả các cột dữ liệu của bảng nhân viên
+select ten, luong from NHANVIEN;
+# Chỉ lấy ra dữ liệu của cột tên, luong trong bảng NHANVIEN
+
+# 2) Select và mệnh đề where sử dụng để lọc dữ liệu dứa trên điều kiện
+select * from nhanvien where ten = 'Le Van Tuan';
+# lấy ra tất cả thông tin của các cột và các bản ghi có dữ liệu của cột tên = 'Le Van Tuan';
+
+# 3) AND, OR, NOT: Sử dụng để kết hợp nhiều điều kiện trong câu lệnh WHERE.
+select * from nhanvien where luong = 10000 OR luong = 20000;
+# lấy ra tất cả các bản ghi có dữ liệu của cột lương = 10000 hoặc lương = 20000
+
+select * from nhanvien where luong = 10000 OR luong = 20000 and MaNV = 'A001';
+# lấy ra tất cả các bản ghi có dữ liệu của cột lương = 10000 hoặc lương = 20000 và mã nhân viên = 'A001'
+
+# 4) ORDER BY: Sắp xếp kết quả trả về. DESC: giảm dần, ASC: tăng dần
+select * from nhanvien order by luong  DESC;
+# lấy ra tất cả dữ liệu bảng nhân viên, sắp xếp giảm dần theo dữ liệu của cột lương
+
+# 5) GROUP BY: Nhóm dữ liệu dựa trên một hoặc nhiều cột.
+select luong,count(*) from nhanvien group by luong;
+# nhóm tất cả các bản ghi có cùng dữ liệu lương, và đếm số lượng bản ghi ở mỗi loại
+

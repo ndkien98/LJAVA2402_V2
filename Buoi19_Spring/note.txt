@@ -1,0 +1,78 @@
+
+
+- Servlet -> War
+	webserver: Tomcat
+	công nghệ kết nối database: JDBC 
+	cấu hình file XML
+	
+- Spring MVC 
+	webserver tomcat: nhúng thẳng vào file build là file.jar
+	công nghệ kết nối database: Hibernate, JPA, ORM
+	cấu hình file XML
+
+- Spring Boot
+	webserver tomcat: nhúng thẳng vào file build là file.jar
+	công nghệ kết nối database: Hibernate, JPA, ORM, Spring Data JPA 
+	cấu hình file application.properties 
+	
+	Ví dụ: 
+	class DashboardController chỉ một class bình thường,
+ nếu không được đánh dấu @Controller
+ nhưng vì anh muốn đây là một controller và được Spring Bean
+ khởi tạo bean tự động (object = new object)
+ lên anh đánh dấu @Controller cho class DashboardController
+ để spring bean sẽ tự động khởi tạo bean (Object = new Object)
+ khi bắt đầu chạy project
+
+ * Mục đích của các annotation :
+    @Component, @Controller, @Repository, @Service
+ là đánh dấu các class nào sẽ được spring container tự động khởi tạo
+ bean (Chính là khởi tạo object bằng từ khóa new)
+ 
+ @Controller: Giúo tiếp nhận request từ client và trả ra view 
+ @RestController: Giúo tiếp nhận request từ client và biến đổi 
+                dữ liệu Java thành kiểu dữ liệu Json 
+ @Service: Giúp khởi tạo bean tự động và đánh dấu đấy là tầng 
+            xử lý logic 
+ @Repository: Giúp đánh dấu đó là tầng kết nối với database 
+ 
+ 
+ * Thymeleaf : 
+	là công nghệ giúp hiển thị dữ liệu Java lên file HTML 
+	
+	
+* Cấu trúc project khi mới tạo 
+	- file ClaimManagerApplication
+		+ là file main chính sử dụng để chạy project 
+		
+	- package: vn.com.t3h
+		+ là package cha đứa tất cả các 
+		package con và các file class trong project 
+	- folder resources: 
+		+ chứa các file tài nguyên, file template 
+		, file config, file html,css, js của project
+		+ tóm lại: 
+			chứa tất cả các file khác file Java 
+			
+		+ folder static:
+			- chứa các file css, js, img của 
+			các file giao diện html, css
+		+ templates:
+			- chứa tất cả các file html giao 
+			diện của dự án 
+		+ file application.properties:
+			- chứa các cấu hình của dự án 
+				+ config database 
+				+ config mã hóa...
+		
+	- file pom.xml
+		+ là file sử dụng công nghệ maven 
+		khai báo tất cả các thư viện, version 
+		thư viện, quản lý tất cả các thư viện 
+		của project 
+		+ giúp build project, chứa tất cả 
+		các thông tin về version của project
+		+ các thư viện nằm trong cặp thẻ 
+		<dependencies></dependencies>
+		+ khi muốn thêm thư viện mới thì 
+		thêm vào giữa cặp thẻ đó 

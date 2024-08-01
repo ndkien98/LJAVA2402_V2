@@ -1,0 +1,20 @@
+
+
+
+ - master
+ - develop
+ - 	feature/tên_ng_thực_hien
+ - 	feature/tên_chức_năng
+ 
+-------
+	- sau khi code xong 1 tinh năng hoặc chức năng	
+		+ pull code từ develop về nhánh cá nhân
+			+ nếu trường hợp có conflict => giải quyết confilct tại máy local trước 
+		+ push code lên nhánh cá nhân 
+		+ tạo merge request từ nhánh cá nhân và add leader vào review và accept merge request 
+		+ check lại toàn bộ code tại merge request 
+	
+		
+	- luôn đảm bảo code tại nhánh develop lúc nào cũng phải chạy được 
+	- sử dụng git ignore config chỉ push lên các filde code còn không push và commit các file cấu hình 
+		
