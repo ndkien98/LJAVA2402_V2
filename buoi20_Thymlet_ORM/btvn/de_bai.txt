@@ -1,0 +1,10 @@
+* Bài tập về nhà 
+  - Dựa vào file diagram insuranceclaim.png tạo ra database mới và tạo ra các entity ứng với 
+  các table để khi run project spring boot sẽ có thể tự động tạo ra các table và mối quan hệ 
+  y hệt hình insuranceclaim.png, ví dụ dựa và các entity demo đã có 
+  - tóm lại nhiệm vụ:
+    1) tạo ra database mới 
+    2) tạo ra các entity ứng với mô hình các table trong ảnh insuranceclaim.png với các mối quan 
+    hệ y hệt, tham khảo các entity đã có 
+project mẫu trong: 
+	LJAVA2402\Buoi19_Spring\claim-manager
