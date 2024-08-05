@@ -1,3 +1,6 @@
+Package entity: 
+là package chứa các class được ánh xạ lại giống với các table trong database 
+để đóng vai trò chứa dữ liệu khi query dữ liệu ra từ trong database 
 
 1) Thêm các thư viện vào file pom.xml
 để có thể kết nối được tới mysql và sử dụng các

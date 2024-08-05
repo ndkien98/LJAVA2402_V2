@@ -24,4 +24,13 @@ public class ClaimEntity extends BaseEntity {
     @JoinColumn(name = "product_id") // tạo ra cột product_id trong bảng claim và làm khóa ngoại tham chiếu tới bảng insurance_product
     private InsuranceProductEntity insuranceProductEntity;
 
+    @ManyToOne
+    @JoinColumn(name = "status_id")
+    private ClaimStatus claimStatus;
+
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private CustomerEntity customerEntity;
+
+
 }
