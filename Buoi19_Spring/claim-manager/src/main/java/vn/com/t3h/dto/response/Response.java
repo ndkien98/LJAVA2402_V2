@@ -1,4 +1,4 @@
-package vn.com.t3h.dto;
+package vn.com.t3h.dto.response;
 
 public class Response {
     private Integer code;

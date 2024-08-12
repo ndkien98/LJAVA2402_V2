@@ -48,5 +48,4 @@ public class UserEntity extends BaseEntity{
     )
     // 1 user có nhiều quyền
     private Set<RoleEntity> roleEntities = new HashSet<>();
-
 }

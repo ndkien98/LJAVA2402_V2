@@ -33,7 +33,6 @@ public class UserDTO {
 
     private Long id;
     private String username;
-    private String password;
     private String code;
     private String email;
     private String phone;
@@ -46,5 +45,4 @@ public class UserDTO {
     private LocalDate lastModifiedDate;
     private String lastModifiedBy;
     private Boolean deleted;
-
 }
