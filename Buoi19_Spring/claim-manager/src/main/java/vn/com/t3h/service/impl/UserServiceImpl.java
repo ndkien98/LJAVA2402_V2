@@ -8,6 +8,10 @@ import vn.com.t3h.repository.UserRepository;
 import vn.com.t3h.service.IUserService;
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ Được sử dụng để triển khai code xử lý các hàm được khai báo tại interface IUserService
+ */
 @Service// đánh dấu đây là tầng service
 public class UserServiceImpl implements IUserService {
     @Autowired

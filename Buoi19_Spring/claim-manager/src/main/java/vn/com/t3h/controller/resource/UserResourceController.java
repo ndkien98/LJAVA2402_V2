@@ -18,7 +18,9 @@ public class UserResourceController {
     @Autowired // Tiêm bean từ ngoài vào sử dụng design DI
     private IUserService iUserService; // khai báo tầng service
 
-    @GetMapping("all-user")// định nghĩa url sẽ được mapping. ứng với url http://localhost:8080/api/user/all-user sẽ được hàm getAllUser tiếp nhận và xử lý
+    // Sử dụng phương thức GET
+    @GetMapping("all-user")// định nghĩa url sẽ được mapping. ứng với url http://localhost:8080/api/user/all-user
+    // sẽ được hàm getAllUser tiếp nhận và xử lý
     public ResponseEntity<List<UserDTO>> getAllUser() {
         // gọi tới tầng service để nhận về dữ liệu DTO
         List<UserDTO> userDTOList = iUserService.getAllUser();
