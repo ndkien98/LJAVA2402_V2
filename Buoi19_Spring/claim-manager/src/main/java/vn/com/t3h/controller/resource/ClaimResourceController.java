@@ -15,11 +15,9 @@ import java.util.List;
 @RestController
 @RequestMapping("api/claim")
 public class ClaimResourceController {
-
     // Khai baos claim service
     @Autowired
     private IClaimService claimService;
-
     // Khai bao ham getAllClaim
     @GetMapping("/all-claim")
     public ResponseEntity<List<ClaimDTO>> getAllClaims(
