@@ -7,10 +7,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import vn.com.t3h.dto.ClaimDTO;
-import vn.com.t3h.dto.response.Response;
+import vn.com.t3h.dto.request.ClaimRequestFilter;
+import vn.com.t3h.dto.response.ResponsePage;
 import vn.com.t3h.entity.ClaimEntity;
+import vn.com.t3h.mapper.ClaimMapper;
 import vn.com.t3h.repository.ClaimRepository;
 import vn.com.t3h.service.IClaimService;
+import vn.com.t3h.utils.DateUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +24,9 @@ public class ClaimServiceImpl implements IClaimService {
     // Khai báo claim repository
     @Autowired
     private ClaimRepository claimRepository;
+
+    @Autowired
+    private ClaimMapper claimMapper;
 
     public List findAllWithSort(){
         List<ClaimEntity> claims = claimRepository.findAll(Sort.by("amount").descending());
@@ -36,30 +42,28 @@ public class ClaimServiceImpl implements IClaimService {
     }
 
     @Override
-    public List<ClaimDTO> getAllClaim() {
-        // Viết hàm xử lý tại đây
-        List<ClaimEntity> claimEntities = claimRepository.findAll();
-        List<ClaimDTO> claimDTOS = new ArrayList<>();
-        for (ClaimEntity claimEntity : claimEntities) {
-            ClaimDTO claimDTO = new ClaimDTO();
-            claimDTO.setId(claimEntity.getId());
-            claimDTO.setClaimDate(claimEntity.getClaimDate());
-            claimDTO.setClaimCode(claimDTO.getClaimCode());
-            claimDTO.setAmount(claimEntity.getAmount());
-            claimDTO.setDescription(claimEntity.getDescription());
+    public ResponsePage<List<ClaimDTO>> getAllClaim(ClaimRequestFilter filter,Pageable pageable) {
 
-            if (claimEntity.getInsuranceProductEntity() != null){
-                claimDTO.setInsuranceProductName(claimEntity.getInsuranceProductEntity().getName());
-            }
-            if (claimEntity.getClaimStatus() != null){
-                claimDTO.setStatus(claimEntity.getClaimStatus().getCode());
-                claimDTO.setStatusDescription(claimEntity.getClaimStatus().getDescription());
-            }
-            if (claimEntity.getCustomerEntity() != null){
-                claimDTO.setCustomerName(claimEntity.getCustomerEntity().getName());
-            }
-            claimDTOS.add(claimDTO);
-        }
-        return claimDTOS;
+        // Viết hàm xử lý tại đây
+        // convert string data to LocalDate
+        filter.setFromDateQuery(DateUtils.strToDate(filter.getFromDate()));
+        filter.setToDateQuery(DateUtils.strToDate(filter.getToDate()));
+
+        // query data base
+        Page<ClaimEntity> page = claimRepository.findByFilter(filter,pageable);
+
+        List<ClaimEntity> claimEntities = page.getContent();
+
+        // convert entity to dto
+        List<ClaimDTO> claimDTOS = claimMapper.toDtos(claimEntities);
+
+        // set data to response
+        ResponsePage<List<ClaimDTO>> responsePage = new ResponsePage<>();
+        responsePage.setContent(claimDTOS);
+        responsePage.setPageNumber(pageable.getPageNumber());
+        responsePage.setPageSize(pageable.getPageSize());
+        responsePage.setTotalPages(page.getTotalPages());
+        responsePage.setTotalElements(page.getTotalElements());
+        return responsePage;
     }
 }
