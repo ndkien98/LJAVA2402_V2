@@ -11,7 +11,7 @@ import vn.com.t3h.service.IClaimService;
 
 import java.time.LocalDate;
 import java.util.List;
-
+// http://localhost:8080/api/claim/all-claim
 @RestController
 @RequestMapping("api/claim")
 public class ClaimResourceController {
