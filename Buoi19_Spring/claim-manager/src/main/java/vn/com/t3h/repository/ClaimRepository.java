@@ -25,16 +25,7 @@ public interface ClaimRepository extends JpaRepository<ClaimEntity,Long> {
      (claim.deleted is null or false);
      */
     // sử dụng JPQL query thông qua Entity
-    // :#{#filter.claimCode} : cú pháp để truy cập vào thuộc tính của object filter trong JPQL query
-//    @Query(value = "SELECT claim FROM ClaimEntity claim LEFT JOIN claim.claimStatus status " +
-//            "WHERE (:#{#filter.claimCode} IS NULL OR claim.code = :#{#filter.claimCode}) AND " +
-//            "(:#{#filter.fromDate} IS NULL OR claim.claimDate >= :#{#filter.fromDate}) AND " +
-//            "(:#{#filter.toDate} IS NULL OR claim.claimDate <= :#{#filter.toDate}) AND " +
-//            "(#{#filter.statusCode} IS NULL OR status.code = :#{#filter.statusCode}) AND " +
-//            "(claim.deleted IS NULL OR claim.deleted = false)")
-//    Page<ClaimEntity> findByFilter(@Param("filter")ClaimRequestFilter filter, Pageable pageable);
-
-    @Query(value = "SELECT claim FROM ClaimEntity claim LEFT JOIN claim.claimStatus status " +
+    @Query(value = "SELECT claim FROM ClaimEntity claim LEFT JOIN claim.claimStatusEntity status " +
             "WHERE (:#{#filter.claimCode} IS NULL OR claim.code = :#{#filter.claimCode}) AND " +
             "(:#{#filter.fromDateQuery} IS NULL OR claim.claimDate >= :#{#filter.fromDateQuery}) AND " +
             "(:#{#filter.toDateQuery} IS NULL OR claim.claimDate <= :#{#filter.toDateQuery}) AND " +

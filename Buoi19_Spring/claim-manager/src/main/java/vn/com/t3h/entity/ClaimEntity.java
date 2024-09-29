@@ -26,7 +26,7 @@ public class ClaimEntity extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "status_id")
-    private ClaimStatus claimStatus;
+    private ClaimStatusEntity claimStatusEntity;
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
