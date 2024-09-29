@@ -9,7 +9,7 @@ import lombok.Setter;
 @Table(name = "claim_status")
 @Getter
 @Setter
-public class ClaimStatus extends BaseEntity{
+public class ClaimStatusEntity extends BaseEntity{
     private String code;
     private String description;
 

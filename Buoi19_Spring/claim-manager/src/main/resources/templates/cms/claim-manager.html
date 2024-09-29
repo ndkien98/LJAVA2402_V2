@@ -70,14 +70,15 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-12 text-right">
-                            <button id="search-button" class="btn btn-primary">Tìm kiếm</button>
+                            <!-- gán event onclick với hàm search() trong file js -->
+                            <button id="search-button" onclick="search()" class="btn btn-primary">Tìm kiếm</button>
                         </div>
                     </div>
 
 
                     <div class="card">
                         <div class="table-responsive text-nowrap">
-                            <table class="table">
+                            <table class="table" id="tableData">
                                 <thead>
                                 <tr>
                                     <th><input type="checkbox" id="selectAll"></th>
@@ -90,7 +91,15 @@
                                 </tr>
                                 </thead>
                                 <tbody class="table-border-bottom-0">
-
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
 
                                 </tbody>
                             </table>
@@ -100,20 +109,11 @@
     margin-top: 2%;
     padding-right: 2%;
 ">
-                                <ul class="pagination">
-                                    <li class="page-item">
-                                        <a class="page-link" href="#" aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
-                                        </a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#" aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                        </a>
-                                    </li>
+                                <ul class="pagination" id="paginationId">
+<!--                                    <li class="page-item"><a class="page-link-" href="#">1</a></li>-->
+<!--                                    <li class="page-item"><a class="page-link" href="#">2</a></li>-->
+<!--                                    <li class="page-item"><a class="page-link" href="#">3</a></li>-->
+
                                 </ul>
                             </nav>
                         </div>

@@ -14,8 +14,8 @@ public interface ClaimMapper {
     @Mapping(source = "code",target = "claimCode")
     @Mapping(source = "customerEntity.name",target = "customerName")
     @Mapping(source = "insuranceProductEntity.name",target = "insuranceProductName")
-    @Mapping(source = "claimStatus.code",target = "status")
-    @Mapping(source = "claimStatus.description",target = "statusDescription")
+    @Mapping(source = "claimStatusEntity.code",target = "status")
+    @Mapping(source = "claimStatusEntity.description",target = "statusDescription")
     ClaimDTO toDto(ClaimEntity claimEntity);
 
     List<ClaimDTO> toDtos(List<ClaimEntity> claimEntities);
