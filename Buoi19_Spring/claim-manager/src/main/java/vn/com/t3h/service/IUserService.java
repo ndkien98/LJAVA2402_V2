@@ -11,4 +11,8 @@ import java.util.List;
 public interface IUserService {
 
     public List<UserDTO> getAllUser();
+
+    UserDTO findById(Long id);
+
+    UserDTO updateUser(UserDTO userDTO);
 }

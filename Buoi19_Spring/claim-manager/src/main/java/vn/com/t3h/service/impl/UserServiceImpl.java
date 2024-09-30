@@ -4,10 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import vn.com.t3h.dto.UserDTO;
 import vn.com.t3h.entity.UserEntity;
+import vn.com.t3h.mapper.UserMapper;
 import vn.com.t3h.repository.UserRepository;
 import vn.com.t3h.service.IUserService;
+
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  Được sử dụng để triển khai code xử lý các hàm được khai báo tại interface IUserService
@@ -16,6 +21,11 @@ import java.util.List;
 public class UserServiceImpl implements IUserService {
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private UserMapper userMapper;
+
+
     @Override
     public List<UserDTO> getAllUser() {
         // query lấy danh sách user từ database sử dụng repository
@@ -47,5 +57,41 @@ public class UserServiceImpl implements IUserService {
         }
         // trả về danh sách user cho controller
         return userDTOs;
+    }
+
+    @Override
+    public UserDTO findById(Long id) {
+        if (id == null) {
+            id = 1l;
+        }
+        Optional<UserEntity> userEntity = userRepository.findById(id);
+        if (userEntity.isEmpty()){
+            throw  new RuntimeException("user not found");
+        }
+
+        UserDTO userDTO = userMapper.entityToDto(userEntity.get());
+
+        return userDTO;
+    }
+
+    @Override
+    public UserDTO updateUser(UserDTO userDTO) {
+        // tìm kiếm user theo id để thực hiện update
+        UserEntity userEntity = userRepository.findById(userDTO.getId()).orElse(null);
+        if (userEntity == null) {
+            throw  new RuntimeException("user not found");
+        }
+        // set các giá trị cho phép update thông tin profile
+        userEntity.setLastName(userDTO.getLastName());
+        userEntity.setFirstName(userDTO.getFirstName());
+        userEntity.setPhone(userDTO.getPhone());
+        userEntity.setAddress(userDTO.getAddress());
+        userEntity.setEmail(userDTO.getEmail());
+        userEntity.setLastModifiedDate(LocalDateTime.now());
+        // lưu dữ liệu được thay đổi vào database
+        userEntity = userRepository.save(userEntity);
+
+        UserDTO userResponse = userMapper.entityToDto(userEntity);
+        return userResponse;
     }
 }
