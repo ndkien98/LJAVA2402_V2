@@ -2,10 +2,7 @@ package vn.com.t3h.controller.resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import vn.com.t3h.dto.UserDTO;
 import vn.com.t3h.service.IUserService;
 
@@ -26,5 +23,18 @@ public class UserResourceController {
         List<UserDTO> userDTOList = iUserService.getAllUser();
         // trả dữ liệu từ service về response để chuyển sang dữ liệu dưới dạng json
         return ResponseEntity.ok(userDTOList);
+    }
+    // PathVariable truyền tham số trên url
+    // viết api lấy ra thông tin user dự vào id
+    @GetMapping("/{id}")
+    public ResponseEntity<UserDTO> findById(@PathVariable Long id) {
+        UserDTO userDTO = iUserService.findById(id);
+        return ResponseEntity.ok(userDTO);
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<UserDTO> updateUser(@RequestBody UserDTO userDTO){
+        UserDTO responseUser = iUserService.updateUser(userDTO);
+        return ResponseEntity.ok(responseUser);
     }
 }

@@ -45,4 +45,7 @@ public class UserDTO {
     private LocalDate lastModifiedDate;
     private String lastModifiedBy;
     private Boolean deleted;
+    private String avatar;
+    private String roleName;
+
 }
