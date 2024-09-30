@@ -12,4 +12,14 @@ public class UserController {
     public String profile(){
         return "cms/user/profile";
     }
+
+    @GetMapping("/manager")
+    public String manager(){
+        return "cms/user/user-manager";
+    }
+
+    @GetMapping("/add")
+    public String add(){
+        return "cms/user/user-add";
+    }
 }
