@@ -37,5 +37,5 @@ import vn.com.t3h.entity.UserEntity;
 @Repository // để spring boot hiểu đây là interface repository và tự động tạo và quản lý bean
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
-    UserEntity findByUsername(String username);
+    UserEntity findByUsernameAndDeletedIsFalse(String username);
 }

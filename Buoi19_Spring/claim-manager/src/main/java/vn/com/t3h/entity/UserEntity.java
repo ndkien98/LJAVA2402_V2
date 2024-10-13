@@ -38,7 +38,7 @@ public class UserEntity extends BaseEntity{
      cascade = CascadeType.ALL: khi tạo ra hoặc xóa đi một user
             -> sẽ có thể tạo ra hoặc xóa đi một role đính kèm
      */
-    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinTable( // tự động tạo ra bảng phụ user_roles
             name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"), /* Cấu hình để thuộc tính user_id trong bảng phụ user_roles
