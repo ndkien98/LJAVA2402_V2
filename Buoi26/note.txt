@@ -1,0 +1,30 @@
+
+
+
+- Cách kiểm tra thông tin call api trên trình duyệt 
+	f12 -> vào network
+	name: thông tin các request gửi từ trình duyệt lên server 
+	khi click vào Name( chi tiết 1 request sẽ thấy các thông tin)
+		+ Headers: các thông tin được gửi kèm trong header của request 
+		+ Payload: thông tin được gửi lên từ trìngh duyệt trong request 
+		+ Preview: tổng quan thông tin response trả về 
+		+ Response: thông tin, dữ liệu được trả về trong response cho trình duyệt 
+		+ Init: biểu thị dòng code tạo request 
+		+ Time: thời gian gửi request và nhận được phản hồi 
+		
+		
+Phân trang: 
+	- tổng số sản phẩm: 7
+	- 1 page: 3 sp 
+	-> mấy page: ?
+	7 / 3 = 2 dư 1 -> 3 page 
+	
+ limit: giới hạn bao nhiêu phần tử được lấy ra
+ offet: bắt đàu từ phần tử thứ bao nhiêu
+ page 1, size 3
+select * from claim limit 3 offset 0;
+ page 2, size 3: offset = (page - 1) * size
+select * from claim limit 3 offset 3;
+ page 3, size 3: offset = (3 - 1) * 3 = 6
+select * from claim limit 3 offset 6;
+

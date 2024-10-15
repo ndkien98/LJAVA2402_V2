@@ -1,0 +1,16 @@
+Khung thực hiện project cuối khóa
+
+- Nhóm hoặc thành viên tự đưa ra đề tài: deadline ....
+
+- Phân tích thiết kế hệ thống: deadline ....
+	1) Phân tích các nghiệp vụ và chức năng chính muốn làm của hệ thông 
+	2) Phân thích thiết kế giao diện, dựng giao diện sử dụng các tool figma... sử dụng template có sẵn 
+	3) Thiết kế database 
+		+ thiết kế các bảng dữ liệu 
+		+ thiết kế sơ đồ diagram https://app.diagrams.net/  https://excalidraw.com/
+	
+- Thực hiện phát triển coding: deadline ....
+- Kiểm thử: deadline ....
+- Ngày báo cáo
+	27/10 
+	

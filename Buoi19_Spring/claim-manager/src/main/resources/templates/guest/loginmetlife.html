@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0274)https://api.bidvmetlife.com.vn/sso-server/login?continue=https%3A%2F%2Fapi.bidvmetlife.com.vn%2Fsso-server%2Foauth%2Fauthorize%3Fclient_id%3Dchart%26redirect_uri%3Dhttps%253A%252F%252Fsales.bidvmetlife.com.vn%252Fhome%252Fauthorize%26response_type%3Dcode%26scope%3Duser_info -->
-<html>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
@@ -14,11 +13,11 @@
     <!-- Logo -->
     <img src="./loginmetlife/bidv_metlife2.png" alt="Cumulus NetQ" id="logo-netq">
     <!-- Form -->
-    <form action="http://localhost:8080/cms/dashboard" method="GET" autocomplete="off">
+    <form th:action="@{/perform_login}" method="POST" autocomplete="off">
         <label for="username">Tên đăng nhập</label>
-        <input type="text" name="username" id="username">
+        <input type="text" id="username" name="username">
         <label for="password">Mật khẩu</label>
-        <input type="password" name="password" id="password" autocomplete="off">
+        <input type="password" id="password" name="password" autocomplete="off">
 
         <input type="hidden" name="continueURL" id="continueURL"
                value="https://api.bidvmetlife.com.vn/sso-server/oauth/authorize?client_id=chart&amp;redirect_uri=https%3A%2F%2Fsales.bidvmetlife.com.vn%2Fhome%2Fauthorize&amp;response_type=code&amp;scope=user_info">
