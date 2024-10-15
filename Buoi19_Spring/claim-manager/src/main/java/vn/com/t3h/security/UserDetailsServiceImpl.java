@@ -1,6 +1,5 @@
 package vn.com.t3h.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,20 +12,16 @@ import vn.com.t3h.entity.UserEntity;
 import vn.com.t3h.repository.UserRepository;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-/*
-Custom lại cách truy vấn thông tin username, password của spring security, thay vì sử dụng các account mặc định
-sẽ thực hiện query trong database để lấy ra thông tin user
-chú ý: UserDetailsService phải của package spring security nằm trong org.springframework.security.core.userdetails.UserDetailsService
- */
 @Service
-public class UserDetailServiceImpl implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
+    public UserDetailsServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

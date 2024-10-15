@@ -17,5 +17,26 @@ b2) Tạo file UserDetailServiceImpl phục vụ query username trong spring sec
     xác thực với username, passowrd được truyền lên từ FE
 
 b3) Tạo config Spring security(class: SecurityConfig)
-
+    config role, phân chia quyền cho các url
 b4) Tích hợp với FE
+thêm config
+              .formLogin((form) -> form
+                        .loginPage("/login")
+                        .loginProcessingUrl("/perform_login")
+                        .defaultSuccessUrl("/process-after-login", true) // sau khi login thành công sẽ truy cập vào url process-after-login để điều hướng phân quyền
+                        .failureUrl("/login?error=true")
+                        .permitAll()
+                )
+ tạo controller:
+     @GetMapping(value = "/login")
+     public String LoginController() {
+         return "guest/loginmetlife";
+     }
+
+     // Thực hiện xử lý sau khi login thành công sẽ check quyền và tự động điều hướng với trang
+     // phù hợp ứng với quyền User đã đăng nhập
+     @GetMapping(value = "process-after-login")
+     public String processAfterLoginController() {
+         return loginService.processAfterLogin();
+     }
+ tạo và config from page loginmetlife.html

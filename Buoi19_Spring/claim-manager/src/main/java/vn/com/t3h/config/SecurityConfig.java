@@ -1,39 +1,30 @@
 package vn.com.t3h.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-@Configurable
+@Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
-    // Tạo ra hàm mã hóa, giải mã password được dùng để mã hoa password trong database và Fe
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-
-    // config chính của spring seucirty
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/cms/**").hasRole("ADMIN")
-                        .requestMatchers("/user/**").hasAnyRole("USER", "ADMIN")
-                        .requestMatchers("/", "/home-page", "/login",
+                        .requestMatchers("/cms/**").hasRole("ADMIN") // Chỉ được phép truy cập các url bắt đầu bằng cms như http://localhost:8080/cms/... với quyền ADMIN
+                        .requestMatchers("/user/**").hasAnyRole("USER", "ADMIN") // được phép truy cập các url bắt đầu bằng cms như http://localhost:8080/user/... với quyền ADMIN hoặc USER
+                        .requestMatchers("/", "/home-guest", "/login", // config để vào được các page home, login mà không bắt buộc login
+                                // các config để cho phép lấy ra html, css từ server mà không cần login
                                 "/assets/**", "/fonts/**", "/homeguest_files/**",
                                 "/js/**", "/libs/**", "/loginmetlife/**",
-                                "/page404/**", "/scss/**", "/tasks/**", "/css/**", "/images/**","/cms-rs/**").permitAll()
+                                "/page404/**", "/scss/**", "/tasks/**", "/css/**", "/images/**","/cms-rs/**","/cms/profile.js").permitAll()
                         .requestMatchers("/resource/**").permitAll()
                         .requestMatchers("/api/**").permitAll() // Permit all cho tất cả các endpoint bắt đầu bằng /api
                         .anyRequest().authenticated()
@@ -41,7 +32,7 @@ public class SecurityConfig {
                 .formLogin((form) -> form
                         .loginPage("/login")
                         .loginProcessingUrl("/perform_login")
-                        .defaultSuccessUrl("/cms/dashboard", true) // sau khi login thành công sẽ truy cập vào url process-after-login để điều hướng phân quyền
+                        .defaultSuccessUrl("/process-after-login", true) // sau khi login thành công sẽ truy cập vào url process-after-login để điều hướng phân quyền
                         .failureUrl("/login?error=true")
                         .permitAll()
                 )
@@ -52,9 +43,16 @@ public class SecurityConfig {
         return http.build();
     }
 
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
     public static void main(String[] args) {
-        PasswordEncoder encoder = new BCryptPasswordEncoder();
-        System.out.println("Password account admin: " + encoder.encode("admin"));
-        System.out.println("Password account user: " + encoder.encode("user"));
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        System.out.println(passwordEncoder.encode("admin"));
+        System.out.println(passwordEncoder.encode("user"));
     }
 }
+
