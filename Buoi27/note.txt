@@ -1,0 +1,14 @@
+
+
+Luồng login cơ bản: 
+	
+	Font-end: 
+		b1) Cho phép nhập vào username, password 
+		b2) Khi click Đăng nhập thu thập username, password trên màn hình và call api login 
+		tại back-end để gửi thông tin username, pass lên server 
+		b3) Server nhận được username, password -> kiểm tra trong database nếu tồn tại username, password 
+		trung với data được gửi lên từ FE -> trả về response đăng nhập thành công
+		Ngược lại nếu trong database không có thông tin username, pass tương ứng -> trả về response thất bại 
+		b4) Font-end tiếp nhận response từ BE, nếu thành công -> điều hướng sang page login thành công, 
+		nếu nhận được response thất bài -> đưa ra message cảnh báo login thất bại 
+		
